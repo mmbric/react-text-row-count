@@ -12,8 +12,16 @@
     "attribute",
     "data-attribute"
   ],
-  "author": "",
+  "author": "mmbric",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmbric/react-text-row-count.git"
+  },
+  "homepage": "https://github.com/mmbric/react-text-row-count#readme",
+  "bugs": {
+    "url": "https://github.com/mmbric/react-text-row-count/issues"
+  },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
