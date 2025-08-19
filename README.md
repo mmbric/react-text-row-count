@@ -17,7 +17,7 @@ Peer dependency: `react` (>=17).
 ## Usage
 
 ```tsx
-import { RowCount } from "react-text-row-count";
+import RowCount from "react-text-row-count";
 
 export function Example() {
   return (
@@ -39,9 +39,6 @@ The inner element will receive the `data-row-count` attribute in the DOM and a `
   - **children**: `ReactElement` (required). Must be a single element; the component clones it to inject a ref.
   - **onRowCountChanged**: `(rows: number) => void`. Called whenever the computed row count changes.
 
-- **`calculateRowCount(element: HTMLElement): number`**
-  - Utility that computes the visible row count using the element’s measured height minus padding/borders and the computed line-height. Falls back to `1.2 * fontSize` if line-height is `normal`.
-
 ## DOM event
 
 A `rowcountchanged` event is also emitted on the child element:
@@ -60,48 +57,6 @@ useEffect(() => {
 - The measurement runs on animation frames and coalesces rapid changes.
 - The component attaches `ResizeObserver`, `MutationObserver`, and a `resize` listener. These are cleaned up on unmount.
 - For best accuracy, ensure your element has a known/computed `line-height` and is not subject to transforms that affect layout without affecting layout boxes.
-
-## Live Examples
-
-### Quick Demo Links
-- **[View Basic Demo](http://localhost:3000/example.html)** - HTML/CSS/JS demonstration
-- **[View React Demo](http://localhost:3000/example-react.html)** - React component demonstration
-
-### Running the Demos Locally
-
-#### Option 1: One-command launcher (Recommended)
-```bash
-# Launch demo server and open browser automatically
-node demo.js
-
-# Or using npm script
-npm run demo:open
-```
-
-#### Option 2: Manual server start
-```bash
-# Using npm script
-npm run demo
-
-# Using Python 3
-python -m http.server 3000
-
-# Using Node.js (if you have npx)
-npx serve . -p 3000
-
-# Using PHP
-php -S localhost:3000
-```
-
-Then open your browser to:
-- Basic demo: `http://localhost:3000/example.html`
-- React demo: `http://localhost:3000/example-react.html`
-
-### What the Demos Show
-- **Basic HTML Demo**: Real-time text input with live row count updates, visual row indicators, and attribute changes
-- **React Component Demo**: Actual React component using the library with live callback demonstrations
-
-Both examples are self-contained and demonstrate the library's capabilities without requiring any build tools.
 
 ## License
 

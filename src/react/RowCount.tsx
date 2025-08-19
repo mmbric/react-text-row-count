@@ -1,5 +1,31 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { calculateRowCount } from "../measure/calculateRowCount";
+
+// Inline the calculateRowCount function since it's no longer exported
+function calculateRowCount(element: HTMLElement): number {
+	const computedStyle = window.getComputedStyle(element);
+	const lineHeight = computedStyle.lineHeight;
+	const height = element.scrollHeight;
+	const paddingTop = parseFloat(computedStyle.paddingTop);
+	const paddingBottom = parseFloat(computedStyle.paddingBottom);
+	const borderTop = parseFloat(computedStyle.borderTopWidth);
+	const borderBottom = parseFloat(computedStyle.borderBottomWidth);
+	
+	// Calculate effective height (content height minus padding and borders)
+	const effectiveHeight = height - paddingTop - paddingBottom - borderTop - borderBottom;
+	
+	// Parse line height
+	let lineHeightValue: number;
+	if (lineHeight === 'normal') {
+		// Fallback for normal line-height
+		const fontSize = parseFloat(computedStyle.fontSize);
+		lineHeightValue = fontSize * 1.2;
+	} else {
+		lineHeightValue = parseFloat(lineHeight);
+	}
+	
+	// Calculate row count
+	return Math.max(1, Math.round(effectiveHeight / lineHeightValue));
+}
 
 export type RowCountProps = {
 	children: React.ReactElement;
