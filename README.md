@@ -63,21 +63,32 @@ useEffect(() => {
 
 ## Live Examples
 
-### Basic HTML Demo
-Open `example.html` in your browser to see a live demonstration of how the row counting works. This demo shows:
-- Real-time text input with live row count updates
-- Visual representation of rows
-- Attribute changes as you type
-- Responsive design for different screen sizes
+### Quick Demo Links
+- **[View Basic Demo](http://localhost:3000/example.html)** - HTML/CSS/JS demonstration
+- **[View React Demo](http://localhost:3000/example-react.html)** - React component demonstration
 
-### React Component Demo
-Open `example-react.html` in your browser to see the actual React component in action. This demo includes:
-- Real React component using the library
-- Live callback demonstrations
-- Attribute updates in real-time
-- Interactive textarea with row counting
+### Running the Demos Locally
+1. **Start a local server** (choose one):
+   ```bash
+   # Using Python 3
+   python -m http.server 3000
+   
+   # Using Node.js (if you have npx)
+   npx serve . -p 3000
+   
+   # Using PHP
+   php -S localhost:3000
+   ```
 
-Both examples are self-contained and don't require any build tools or dependencies.
+2. **Open your browser** and navigate to:
+   - Basic demo: `http://localhost:3000/example.html`
+   - React demo: `http://localhost:3000/example-react.html`
+
+### What the Demos Show
+- **Basic HTML Demo**: Real-time text input with live row count updates, visual row indicators, and attribute changes
+- **React Component Demo**: Actual React component using the library with live callback demonstrations
+
+Both examples are self-contained and demonstrate the library's capabilities without requiring any build tools.
 
 ## License
 
