@@ -68,21 +68,34 @@ useEffect(() => {
 - **[View React Demo](http://localhost:3000/example-react.html)** - React component demonstration
 
 ### Running the Demos Locally
-1. **Start a local server** (choose one):
-   ```bash
-   # Using Python 3
-   python -m http.server 3000
-   
-   # Using Node.js (if you have npx)
-   npx serve . -p 3000
-   
-   # Using PHP
-   php -S localhost:3000
-   ```
 
-2. **Open your browser** and navigate to:
-   - Basic demo: `http://localhost:3000/example.html`
-   - React demo: `http://localhost:3000/example-react.html`
+#### Option 1: One-command launcher (Recommended)
+```bash
+# Launch demo server and open browser automatically
+node demo.js
+
+# Or using npm script
+npm run demo:open
+```
+
+#### Option 2: Manual server start
+```bash
+# Using npm script
+npm run demo
+
+# Using Python 3
+python -m http.server 3000
+
+# Using Node.js (if you have npx)
+npx serve . -p 3000
+
+# Using PHP
+php -S localhost:3000
+```
+
+Then open your browser to:
+- Basic demo: `http://localhost:3000/example.html`
+- React demo: `http://localhost:3000/example-react.html`
 
 ### What the Demos Show
 - **Basic HTML Demo**: Real-time text input with live row count updates, visual row indicators, and attribute changes
