@@ -61,6 +61,24 @@ useEffect(() => {
 - The component attaches `ResizeObserver`, `MutationObserver`, and a `resize` listener. These are cleaned up on unmount.
 - For best accuracy, ensure your element has a known/computed `line-height` and is not subject to transforms that affect layout without affecting layout boxes.
 
+## Live Examples
+
+### Basic HTML Demo
+Open `example.html` in your browser to see a live demonstration of how the row counting works. This demo shows:
+- Real-time text input with live row count updates
+- Visual representation of rows
+- Attribute changes as you type
+- Responsive design for different screen sizes
+
+### React Component Demo
+Open `example-react.html` in your browser to see the actual React component in action. This demo includes:
+- Real React component using the library
+- Live callback demonstrations
+- Attribute updates in real-time
+- Interactive textarea with row counting
+
+Both examples are self-contained and don't require any build tools or dependencies.
+
 ## License
 
 MIT

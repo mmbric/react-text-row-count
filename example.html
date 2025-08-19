@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Text Row Count - Live Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .demo-section {
+            margin-bottom: 40px;
+        }
+
+        .demo-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #1f2937;
+            border-bottom: 3px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .textarea-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            line-height: 1.6;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .attribute-display {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .attribute-display h3 {
+            margin-bottom: 15px;
+            color: #1f2937;
+            font-size: 1.2rem;
+        }
+
+        .attribute-value {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .row-count-info {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .row-count-info h3 {
+            color: #065f46;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .row-count-info p {
+            color: #047857;
+            margin-bottom: 10px;
+        }
+
+        .visual-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .row-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .row-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .row-dot.active {
+            opacity: 1;
+        }
+
+        .instructions {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .instructions h3 {
+            color: #92400e;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .instructions ul {
+            color: #92400e;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .code-example {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            color: #10b981;
+        }
+
+        .comment {
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>React Text Row Count</h1>
+            <p>Live demonstration of real-time row counting</p>
+        </div>
+        
+        <div class="content">
+            <div class="instructions">
+                <h3>🎯 How to use this demo:</h3>
+                <ul>
+                    <li>Type or paste text in the textarea below</li>
+                    <li>Watch the <code>data-row-count</code> attribute update in real-time</li>
+                    <li>Resize the textarea to see how row count changes with dimensions</li>
+                    <li>Try different font sizes and line heights to see the effect</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <h2>Live Text Input</h2>
+                
+                <div class="input-group">
+                    <label for="textInput">Enter your text here:</label>
+                    <div class="textarea-container">
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Start typing here to see the row count change in real-time..."
+                            style="line-height: 1.6; font-size: 16px;"
+                        >This is a sample text that demonstrates how the react-text-row-count library works. 
+
+Try typing more text on new lines or resizing this textarea to see how the row count attribute changes dynamically.
+
+The library automatically detects content changes, element resizing, and other layout modifications to provide accurate row counting.</textarea>
+                    </div>
+                </div>
+
+                <div class="attribute-display">
+                    <h3>Current Element Attributes:</h3>
+                    <div class="attribute-value" id="attributeDisplay">
+                        data-row-count="4"
+                    </div>
+                </div>
+
+                <div class="row-count-info">
+                    <h3>Row Count Information:</h3>
+                    <p><strong>Current rows:</strong> <span id="rowCountDisplay">4</span></p>
+                    <p><strong>Element height:</strong> <span id="heightDisplay">0px</span></p>
+                    <p><strong>Line height:</strong> <span id="lineHeightDisplay">0px</span></p>
+                    
+                    <div class="visual-indicator">
+                        <span>Visual representation:</span>
+                        <div class="row-dots" id="rowDots"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2>How It Works</h2>
+                <p>The <code>react-text-row-count</code> library automatically:</p>
+                <ul style="margin: 20px 0; padding-left: 20px;">
+                    <li>Measures the element's height and line height</li>
+                    <li>Calculates the number of text rows</li>
+                    <li>Updates the <code>data-row-count</code> attribute in real-time</li>
+                    <li>Responds to content changes, resizing, and font loading</li>
+                </ul>
+
+                <div class="code-example">
+<span class="comment">// Basic usage</span>
+<span class="highlight">import</span> { RowCount } <span class="highlight">from</span> <span class="comment">"react-text-row-count"</span>;
+
+<span class="highlight">function</span> MyComponent() {
+  <span class="highlight">return</span> (
+    &lt;<span class="highlight">RowCount</span> onRowCountChanged={(rows) => console.log(rows)}&gt;
+      &lt;div style={{ lineHeight: 1.6 }}&gt;
+        Your text content here
+      &lt;/div&gt;
+    &lt;/<span class="highlight">RowCount</span>&gt;
+  );
+}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Simulate the RowCount component behavior for the demo
+        class RowCountDemo {
+            constructor() {
+                this.textarea = document.getElementById('textInput');
+                this.attributeDisplay = document.getElementById('attributeDisplay');
+                this.rowCountDisplay = document.getElementById('rowCountDisplay');
+                this.heightDisplay = document.getElementById('heightDisplay');
+                this.lineHeightDisplay = document.getElementById('lineHeightDisplay');
+                this.rowDots = document.getElementById('rowDots');
+                
+                this.currentRowCount = 0;
+                this.rafId = null;
+                
+                this.init();
+            }
+            
+            init() {
+                // Initial calculation
+                this.calculateRowCount();
+                
+                // Listen for input changes
+                this.textarea.addEventListener('input', () => {
+                    this.scheduleCalculation();
+                });
+                
+                // Listen for resize changes
+                this.textarea.addEventListener('resize', () => {
+                    this.scheduleCalculation();
+                });
+                
+                // Listen for window resize
+                window.addEventListener('resize', () => {
+                    this.scheduleCalculation();
+                });
+                
+                // Listen for font loading
+                if (document.fonts) {
+                    document.fonts.ready.then(() => {
+                        this.scheduleCalculation();
+                    });
+                }
+            }
+            
+            scheduleCalculation() {
+                if (this.rafId) {
+                    cancelAnimationFrame(this.rafId);
+                }
+                this.rafId = requestAnimationFrame(() => {
+                    this.calculateRowCount();
+                });
+            }
+            
+            calculateRowCount() {
+                const computedStyle = window.getComputedStyle(this.textarea);
+                const lineHeight = computedStyle.lineHeight;
+                const height = this.textarea.scrollHeight;
+                const paddingTop = parseFloat(computedStyle.paddingTop);
+                const paddingBottom = parseFloat(computedStyle.paddingBottom);
+                const borderTop = parseFloat(computedStyle.borderTopWidth);
+                const borderBottom = parseFloat(computedStyle.borderBottomWidth);
+                
+                // Calculate effective height (content height minus padding and borders)
+                const effectiveHeight = height - paddingTop - paddingBottom - borderTop - borderBottom;
+                
+                // Parse line height
+                let lineHeightValue;
+                if (lineHeight === 'normal') {
+                    // Fallback for normal line-height
+                    const fontSize = parseFloat(computedStyle.fontSize);
+                    lineHeightValue = fontSize * 1.2;
+                } else {
+                    lineHeightValue = parseFloat(lineHeight);
+                }
+                
+                // Calculate row count
+                const rowCount = Math.max(1, Math.round(effectiveHeight / lineHeightValue));
+                
+                // Update displays
+                this.updateDisplays(rowCount, effectiveHeight, lineHeightValue);
+                
+                // Update data attribute
+                this.textarea.setAttribute('data-row-count', rowCount.toString());
+            }
+            
+            updateDisplays(rowCount, height, lineHeight) {
+                // Update attribute display
+                this.attributeDisplay.textContent = `data-row-count="${rowCount}"`;
+                
+                // Update row count display
+                this.rowCountDisplay.textContent = rowCount;
+                
+                // Update height display
+                this.heightDisplay.textContent = `${Math.round(height)}px`;
+                
+                // Update line height display
+                this.lineHeightDisplay.textContent = `${Math.round(lineHeight)}px`;
+                
+                // Update visual dots
+                this.updateRowDots(rowCount);
+                
+                // Update current row count
+                this.currentRowCount = rowCount;
+            }
+            
+            updateRowDots(rowCount) {
+                // Clear existing dots
+                this.rowDots.innerHTML = '';
+                
+                // Create dots for each row
+                for (let i = 0; i < rowCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'row-dot active';
+                    this.rowDots.appendChild(dot);
+                }
+                
+                // Add some inactive dots to show the visual concept
+                const maxDots = Math.max(8, rowCount + 2);
+                for (let i = rowCount; i < maxDots; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'row-dot';
+                    this.rowDots.appendChild(dot);
+                }
+            }
+        }
+        
+        // Initialize the demo when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new RowCountDemo();
+        });
+    </script>
+</body>
+</html>
