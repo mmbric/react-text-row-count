@@ -5,7 +5,9 @@
   "keywords": [
     "react",
     "rows",
-    "line-height",
+    "line-count",
+    "row-count",
+    "typography",
     "measurement",
     "attribute",
     "data-attribute"
